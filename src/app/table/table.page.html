@@ -1,0 +1,156 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>table</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card size-sm="5">
+          <ion-card-title> BreakFast </ion-card-title>
+          <td>Calories</td>
+          <td>Carbohydrates</td>
+          <td>Fat</td>
+          <td>Protein</td>
+          <td>Sodium</td>
+          <td>Sodium</td>
+          <td>Sugar</td>
+          <ion-card-content>
+            <ion-list>
+              <ion-item *ngFor="let it of getChoosedFood1()" button="true">
+                <ion-label>{{it.id}}</ion-label>
+                <ion-label>{{it.calories}}</ion-label>
+                <ion-label>{{it.carbohydrates}}</ion-label>
+                <ion-label>{{it.fat}}</ion-label>
+                <ion-label>{{it.protein}}</ion-label>
+                <ion-label>{{it.sodium}}</ion-label>
+                <ion-label>{{it.sugar}}</ion-label>
+              </ion-item>
+            </ion-list>
+
+            <ion-button slot="icon-only" id = brbutton  (click) = "displayOptions($event)">
+              <ion-icon name="add"></ion-icon>
+            </ion-button>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col>
+        <ion-card size-sm="5">
+          <ion-card-title> Lunch  </ion-card-title>
+          <ion-card-subtitle class="ion-text-center">
+            Calories, Carbohydrates, Fat, Protein, Sodium, Sugar
+          </ion-card-subtitle>
+          <ion-card-content>
+            <ion-list>
+              <ion-item *ngFor="let it of getChoosedFood2()" button="true">
+                <ion-label>{{it.id}}</ion-label>
+                <ion-label>{{it.calories}}</ion-label>
+                <ion-label>{{it.carbohydrates}}</ion-label>
+                <ion-label>{{it.fat}}</ion-label>
+                <ion-label>{{it.protein}}</ion-label>
+                <ion-label>{{it.sodium}}</ion-label>
+                <ion-label>{{it.sugar}}</ion-label>
+              </ion-item>
+            </ion-list>
+          <ion-button slot="icon-only" id = lunchbutton (click) = "displayOptions($event)">
+              <ion-icon name="add"></ion-icon>
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card size-sm="5">
+          <ion-card-title> Snacks </ion-card-title>
+          <ion-card-subtitle class="ion-text-center">
+            Calories, Carbohydrates, Fat, Protein, Sodium, Sugar
+          </ion-card-subtitle>
+          <ion-card-content>
+            <ion-list>
+              <ion-item *ngFor="let it of getChoosedFood3()" button="true">
+                <ion-label>{{it.id}}</ion-label>
+                <ion-label>{{it.calories}}</ion-label>
+                <ion-label>{{it.carbohydrates}}</ion-label>
+                <ion-label>{{it.fat}}</ion-label>
+                <ion-label>{{it.protein}}</ion-label>
+                <ion-label>{{it.sodium}}</ion-label>
+                <ion-label>{{it.sugar}}</ion-label>
+              </ion-item>
+            </ion-list>
+            <ion-button slot="icon-only" id = snacksbutton  (click) = "displayOptions($event)">
+              <ion-icon name="add"></ion-icon>
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col>
+        <ion-card size-sm="5">
+          <ion-card-title> Dinner </ion-card-title>
+          <ion-card-subtitle class="ion-text-center">
+            Calories, Carbohydrates, Fat, Protein, Sodium, Sugar
+          </ion-card-subtitle>
+          <ion-card-content>
+            <ion-list>
+              <ion-item *ngFor="let it of getChoosedFood4()" button="true">
+                <ion-label>{{it.id}}</ion-label>
+                <ion-label>{{it.calories}}</ion-label>
+                <ion-label>{{it.carbohydrates}}</ion-label>
+                <ion-label>{{it.fat}}</ion-label>
+                <ion-label>{{it.protein}}</ion-label>
+                <ion-label>{{it.sodium}}</ion-label>
+                <ion-label>{{it.sugar}}</ion-label>
+              </ion-item>
+            </ion-list>
+            <ion-button slot="icon-only" id = dinnerbutton (click) = "displayOptions($event)">
+              <ion-icon name="add"></ion-icon>
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Menu</ion-card-title>
+      <ion-card-subtitle class="ion-text-center">
+        Calories,carbohydrates,fat, protein, sodium, sugar</ion-card-subtitle
+      >
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+
+          <ion-select
+            [(ngModel)]="foodSelector"
+            [compareWith]="compareWith"
+            multiple="true"
+            (ionChange)="optionFind()"
+            #myselect
+          >
+            <ion-select-option *ngFor="let it of getVectorCopy()" [value]="it"
+              >{{it.id}}</ion-select-option
+            >
+          </ion-select>
+
+        </ion-item>
+        <ion-button
+        color="primary"
+        [routerLink]="['/','client-nutri','tabs','new-client']"
+       >
+        new Client
+      </ion-button>
+      <ion-button
+      color="primary"
+      routerLink= "/table/tabs/subtable"
+     >
+      Sub table
+    </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

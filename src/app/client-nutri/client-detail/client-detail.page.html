@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Información del cliente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card size-sm="5">
+          <ion-card-title> Consultas Realizadas</ion-card-title>
+          <ion-card-content>
+            <ion-list>
+              <ion-item
+                *ngFor="let it of Informes"
+                button="true"
+              >
+              <!--   [routerLink]="['/','client-nutri','tabs','client-detail',informe]" -->
+                <ion-label>{{it.fecha_informe}}</ion-label>
+                <ion-label>{{it.id_user}}</ion-label>
+              </ion-item>
+            </ion-list>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-button
+  color="primary"
+  style="text-transform: none;"
+  [routerLink]="['/','client-nutri','tabs','client-detail','new-evaluation',client]"
+>
+  Nueva Medición
+</ion-button>
+<ion-button
+color = "secondary"
+style= "text-transform: none;"
+[routerLink] = "['/','client-nutri','tabs','client-detail','new-diet-routine',client]"
+>
+  Nuevo requerimiento calórico
+</ion-button>
+</ion-content>

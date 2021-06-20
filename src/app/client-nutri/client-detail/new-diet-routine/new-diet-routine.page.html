@@ -1,0 +1,187 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>new-diet-routine</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Distribución de Macronutrientes</ion-card-title>
+            <ion-card-subtitle
+              >Defina la distribución de los macronutrientes</ion-card-subtitle
+            >
+          </ion-card-header>
+          <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                  <ion-col class="colEspacio" size-sm = 4>
+
+                  </ion-col>
+                  <ion-col size-sm =4>
+                    <p style="text-align: center;">Porcentaje</p>
+                  </ion-col>
+                  <ion-col size-sm = 4>
+                    <p style="text-align: center;">Gramos</p>
+                  </ion-col>
+
+                </ion-row>
+                <ion-row>
+                  <ion-col size-sm = 4>
+                    <div class="header">
+                      <div class="title">Proteínas</div>
+                    </div>
+                  </ion-col>
+                  <ion-col size-sm = 4>
+
+                    <p style="text-align: center;">{{gmacroProteinPercent}}</p>
+                  </ion-col>
+                  <ion-col size-sm = 4>
+                    <p style="text-align: center;">{{gmacroProteinGram}}</p>
+                  </ion-col>
+
+                </ion-row>
+
+                <ion-row>
+                  <ion-col size-sm = 4>
+                    <ion-range
+                    min="0"
+                    max="100"
+                    value="35"
+                    pin="true"
+                    snaps = true
+                    ticks = true
+                    step = 5
+                    color="success"
+                    class="ion-padding-inline"
+                    (ionChange)="proteinChangeSlider($event)"
+                  >
+                  </ion-range>
+                  </ion-col>
+
+                </ion-row>
+
+                <ion-row>
+                  <ion-col size-sm = 4>
+                    <div class="header">
+                      <div class="title">Carbohidratos</div>
+
+                    </div>
+                  </ion-col>
+                  <ion-col size-sm = 4>
+                    <p style="text-align: center;">{{gmacroCarboPercent}}</p>
+
+                  </ion-col>
+                  <ion-col size-sm = 4>
+                    <p style="text-align: center;">{{gmacroCarboGram}}</p>
+                    </ion-col>
+
+                </ion-row>
+
+                <ion-row>
+                  <ion-col size-sm = 4>
+                    <ion-range
+                    min="0"
+                    max="100"
+                    value="50"
+                    step = 5
+                    snaps = true
+                    ticks = true
+                    pin="true"
+                    color="warning"
+                    class="ion-padding-inline"
+                    (ionChange)="carbosChangeSlider($event)"
+                  >
+                  </ion-range>
+                  </ion-col>
+
+
+
+
+                </ion-row>
+
+                <ion-row>
+                  <ion-col size-sm = 4>
+                    <div class="header">
+                      <div class="title">Grasas</div>
+
+                    </div>
+                  </ion-col>
+                  <ion-col size-sm = 4>
+                    <p style="text-align: center;">{{gmacroFatPercent}}</p>
+
+                  </ion-col>
+                  <ion-col size-sm = 4>
+                    <p
+                    style="text-align: center;">{{gmacroFatGram}}</p>
+                  </ion-col>
+
+                </ion-row>
+
+                <ion-row>
+                  <ion-col size-sm = 4>
+                    <ion-range
+                    min="0"
+                    max="100"
+                    value="15"
+                    step = 5
+                    snaps = true
+                    ticks = true
+                    pin="true"
+                    color="danger"
+                    class="ion-padding-inline"
+                    (ionChange)="fatChangeSlider($event)"
+                  >
+                  </ion-range>
+                  </ion-col>
+
+                </ion-row>
+                <ion-row>
+                  <ion-col size-sm = 4>
+
+                  </ion-col>
+                  <ion-col size-sm = 4>
+
+                    <p *ngIf ="gtotalPercent != 100" style="color: red; text-align: center;">{{gtotalPercent}}</p>
+                    <p *ngIf ="gtotalPercent == 100" style="color: green; text-align: center;">{{gtotalPercent}}</p>
+
+                  </ion-col>
+                </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-card>
+        <ion-card-content>
+          <table class="table table-bordered">
+            <thead>
+              <tr class="table-dagner">
+                <th>Mediciones Básicas</th>
+                <th>15/10/19</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Peso corporal (kg)</th>
+                <td>hola</td>
+              </tr>
+              <tr>
+                <th scope="row">Estatura máxima (cm)</th>
+                <td></td>
+              </tr>
+              <tr>
+                <th scope="row">Estatura Sentado (cm)</th>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+</ion-content>
