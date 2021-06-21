@@ -12,7 +12,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -23,7 +24,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AppRoutingModule,
     AngularFireDatabaseModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },AngularFireAuth, AngularFirestore],
   bootstrap: [AppComponent],

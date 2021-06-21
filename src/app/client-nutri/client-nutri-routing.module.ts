@@ -43,6 +43,10 @@ const routes: Routes = [
     redirectTo:'/client-nutri/tabs',
     pathMatch: 'full'
   },
+  {
+    path: 'food-items',
+    loadChildren: () => import('./food-items/food-items.module').then( m => m.FoodItemsPageModule)
+  },
 
 ];
 
