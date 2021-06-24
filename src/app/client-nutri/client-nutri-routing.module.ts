@@ -9,10 +9,13 @@ const routes: Routes = [
   {
     path: 'tabs',
     children: [
-
       {
         path:'new-client',
         loadChildren: () => import('./new-client/new-client.module').then(m => m.NewClientPageModule)
+      },
+      {
+        path: 'food-items',
+        loadChildren: () => import('./food-items/food-items.module').then( m => m.FoodItemsPageModule)
       },
       {
         path: 'client-detail',
@@ -43,10 +46,7 @@ const routes: Routes = [
     redirectTo:'/client-nutri/tabs',
     pathMatch: 'full'
   },
-  {
-    path: 'food-items',
-    loadChildren: () => import('./food-items/food-items.module').then( m => m.FoodItemsPageModule)
-  },
+
 
 ];
 

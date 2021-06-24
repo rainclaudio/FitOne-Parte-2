@@ -89,7 +89,13 @@ export interface InfoAlimentaria{
 export class ItemAlimentario  {
   constructor(
     public id:string,
-    public info: InfoAlimentaria
+    public descripcion: string,
+  public calorias: number,
+  public cho: number,
+  public prot: number,
+  public fat: number,
+  public sodium: number,
+  public sugar: number,
   ){}
 }
 export class DescripcionComun{
@@ -119,7 +125,13 @@ export class ItemEnCategoria{
 export class Categoria{
   constructor(
     public id: string,
-    public info: InfoAlimentaria
+    public descripcion: string,
+  public calorias: number,
+  public cho: number,
+  public prot: number,
+  public fat: number,
+  public sodium: number,
+  public sugar: number,
   ){}
 }
 
