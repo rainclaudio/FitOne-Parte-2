@@ -21,5 +21,16 @@
   width: 20%;
 }
 .row1{
-  width: 100%;
+  display: flex;
+}
+.itemCategoria{
+  width: 80%;
+  float: left;
+}
+.itemTrashCategoria{
+  width:20%;
+
+  margin: 0 auto;
+  // margin: 0 auto;
+
 }

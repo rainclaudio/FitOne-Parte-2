@@ -10,149 +10,183 @@
 </ion-header>
 
 <ion-content text-center padding>
-  <form [formGroup]="formcreateItem">
-    <ion-grid>
+  <ion-grid>
+    <form [formGroup]="formcreateItem">
       <ion-row>
-        <ion-col size-sm="6">
-          <ion-list>
-            <ion-item>
-              <ion-label position="floating">Descripción</ion-label>
-              <ion-input type="text" formControlName="descripcion"></ion-input>
-            </ion-item>
+        <ion-col>
+          <ion-card>
+            <ion-card-title class="ion-text-center"
+              >Información sobre el Alimento</ion-card-title
+            >
+            <ion-card-content>
+              <ion-list>
+                <ion-item>
+                  <ion-label position="floating">Descripción</ion-label>
+                  <ion-input
+                    type="text"
+                    formControlName="descripcion"
+                  ></ion-input>
+                </ion-item>
 
-            <ion-item>
-              <ion-label position="floating">Calorías</ion-label>
-              <ion-input type="number" formControlName="calorias"></ion-input>
-            </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Calorías</ion-label>
+                  <ion-input
+                    type="number"
+                    formControlName="calorias"
+                  ></ion-input>
+                </ion-item>
 
-            <ion-item>
-              <ion-label position="floating">Carbohidratos</ion-label>
-              <ion-input
-                type="number"
-                formControlName="carbohidrados"
-              ></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Proteínas</ion-label>
-              <ion-input type="number" formControlName="proteinas"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Grasa</ion-label>
-              <ion-input type="number" formControlName="grasas"></ion-input>
-            </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Carbohidratos</ion-label>
+                  <ion-input
+                    type="number"
+                    formControlName="carbohidrados"
+                  ></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Proteínas</ion-label>
+                  <ion-input
+                    type="number"
+                    formControlName="proteinas"
+                  ></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Grasa</ion-label>
+                  <ion-input type="number" formControlName="grasas"></ion-input>
+                </ion-item>
 
-            <ion-item>
-              <ion-label position="floating">Sodio[mg]</ion-label>
-              <ion-input type="number" formControlName="sodio"></ion-input>
-            </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Sodio[mg]</ion-label>
+                  <ion-input type="number" formControlName="sodio"></ion-input>
+                </ion-item>
 
-            <ion-item>
-              <ion-label position="floating">Azucar[mg]</ion-label>
-              <ion-input type="number" formControlName="azucar"></ion-input>
-            </ion-item>
-          </ion-list>
+                <ion-item>
+                  <ion-label position="floating">Azucar[mg]</ion-label>
+                  <ion-input type="number" formControlName="azucar"></ion-input>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
         </ion-col>
       </ion-row>
-    </ion-grid>
-  </form>
-  <ion-row>
-    <ion-col size-sm="6" offset-sm="3">
-      <ion-button
-        type="submit"
-        color="primary"
-        expand="block"
-        [disabled]="!formcreateItem.valid"
-        >Book!</ion-button
-      >
-    </ion-col>
-  </ion-row>
-
-  <ion-row>
+    </form>
     <form [formGroup]="formPorciones">
-
-          <!-- </ion-row> -->
+      <ion-row>
+        <!-- </ion-row> -->
         <!-- </ion-grid> -->
-
-        <ion-list
-          *ngFor="
-            let arrayPForm of formPorciones.get('arrayP')['controls'];
-            let i = index
-          "
-        >
-          <div [formGroup]="arrayPForm">
-            <ion-item class="div1">
-              <ion-label position ="stacked">Descripción</ion-label>
-              <ion-select
-                formControlName="descripcion"
-                [interfaceOptions]="customActionSheetOptions"
-                interface="popover"
-                placeholder="Select One"
+        <ion-col>
+          <ion-card>
+            <ion-card-title class="ion-text-center"
+              >Porciones comunes del alimento</ion-card-title
+            >
+            <ion-card-content>
+              <ion-list
+                *ngFor="
+                  let arrayPForm of formPorciones.get('arrayP')['controls'];
+                  let i = index
+                "
               >
-                <ion-select-option
-                  *ngFor="let it of gdescripcionVector"
-                  [value]="it"
-                  >{{ it.descripcion }}</ion-select-option
-                >
-              </ion-select>
-            </ion-item>
+                <div [formGroup]="arrayPForm">
+                  <ion-item class="div1">
+                    <ion-label position="stacked">Descripción</ion-label>
+                    <ion-select
+                      formControlName="descripcion"
+                      [interfaceOptions]="customActionSheetOptions"
+                      interface="popover"
+                      placeholder="Select One"
+                    >
+                      <ion-select-option
+                        *ngFor="let it of gdescripcionVector"
+                        [value]="it"
+                        >{{ it.descripcion }}</ion-select-option
+                      >
+                    </ion-select>
+                  </ion-item>
 
-            <ion-item class="div2">
-              <ion-label position="stacked">Cantidad[gr]</ion-label>
-              <ion-input
-                type="number"
-                formControlName="gramosporporcion"
-              ></ion-input>
-            </ion-item>
-            <ion-item *ngIf ="!isFirstDescripcion" lines = "none" class="div3">
-              <ion-icon name = trash (click) = "onRemovePorcion(i)"></ion-icon>
-            </ion-item>
-          </div>
-        </ion-list>
-
+                  <ion-item class="div2">
+                    <ion-label position="stacked">Cantidad[gr]</ion-label>
+                    <ion-input
+                      type="number"
+                      formControlName="gramosporporcion"
+                    ></ion-input>
+                  </ion-item>
+                  <ion-item
+                    *ngIf="!isFirstDescripcion"
+                    lines="none"
+                    class="div3"
+                  >
+                    <ion-icon
+                      name="trash"
+                      (click)="onRemovePorcion(i)"
+                    ></ion-icon>
+                  </ion-item>
+                </div>
+              </ion-list>
+              <ion-button (click)="AddPorcion()">Añadir porción común</ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
     </form>
-  </ion-row>
-  <ion-row>
-    <ion-button (click)="AddPorcion()">Add</ion-button>
-  </ion-row>
-
-  <ion-row>
     <form [formGroup]="formCategorias">
-
-          <!-- </ion-row> -->
-        <!-- </ion-grid> -->
-
-        <ion-list
-          *ngFor="
-            let arrayCategoria of  formCategorias.get('arrayCategoria')['controls'];
-            let i = index
-          "
-        >
-          <div [formGroup]="arrayCategoria">
-            <ion-item class="div1">
-              <ion-label position ="stacked">Descripción</ion-label>
-              <ion-select
-                formControlName="descripcion"
-                [interfaceOptions]="customActionSheetOptions"
-                interface="popover"
-                placeholder="Select One"
+      <ion-row>
+        <ion-col>
+          <ion-card>
+            <ion-card-title class="ion-text-center">Categoria</ion-card-title>
+            <ion-card-content>
+              <ion-list
+                *ngFor="
+                  let arrayCategoria of formCategorias.get('arrayCategoria')[
+                    'controls'
+                  ];
+                  let i = index
+                "
               >
-                <ion-select-option
-                  *ngFor="let it of gcategoriaVector"
-                  [value]="it"
-                  >{{ it.descripcion }}</ion-select-option
-                >
-              </ion-select>
-            </ion-item>
-            <ion-item *ngIf ="!isFirstCategoria" lines = "none" class="div2">
-              <ion-icon name = trash (click) = "onRemoveCategoria(i)"></ion-icon>
-            </ion-item>
-          </div>
-        </ion-list>
-
+                <div [formGroup]="arrayCategoria">
+                  <ion-item class="itemCategoria">
+                    <ion-label position="stacked">Descripción</ion-label>
+                    <ion-select
+                      formControlName="descripcion"
+                      [interfaceOptions]="customActionSheetOptions"
+                      interface="popover"
+                      placeholder="Select One"
+                    >
+                      <ion-select-option
+                        *ngFor="let it of gcategoriaVector"
+                        [value]="it"
+                        >{{ it.descripcion }}</ion-select-option
+                      >
+                    </ion-select>
+                  </ion-item>
+                  <ion-item *ngIf="!isFirstCategoria" lines="none">
+                    <ion-icon
+                      name="trash"
+                      (click)="onRemoveCategoria(i)"
+                    ></ion-icon>
+                  </ion-item>
+                </div>
+              </ion-list>
+              <ion-button (click)="AddCategoria()">Añadir categoria</ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
     </form>
-  </ion-row>
-  <ion-row>
-    <ion-button (click)="AddCategoria()">Add</ion-button>
-  </ion-row>
-
+    <ion-row>
+      <ion-col size-sm="6" offset-sm="3">
+        <ion-button
+          type="submit"
+          color="primary"
+          expand="block"
+          [disabled]="
+            !formcreateItem.valid ||
+            !formPorciones.valid ||
+            !formCategorias.valid
+          "
+          (click)="onCreateItem()"
+          >Crear Item!</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

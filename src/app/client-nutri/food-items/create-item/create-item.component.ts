@@ -76,7 +76,17 @@ export class CreateItemComponent implements OnInit {
   }
 
   onCreateItem(){
-
+    for(let control of this.arrayP.controls){
+      if(control instanceof FormGroup){
+        console.log(control.value.descripcion.descripcion);
+        console.log(control.value.gramosporporcion);
+      }
+    }
+    for(let control of this.arrayCategoria.controls){
+      if(control instanceof FormGroup){
+        console.log(control.value.descripcion.descripcion);
+      }
+    }
   }
   onCancelCreation(){
     this.modalCtrl.dismiss(null,'cancel');
@@ -98,16 +108,17 @@ export class CreateItemComponent implements OnInit {
   }
   AddCategoria(){
     this.isFirstCategoria = false;
-    (<FormArray>this.formCategorias.controls['arrayCategoria'])
-    .push(new FormGroup({
-      descripcion: this.createFormControl(),
-     }));
+    console.log(this.arrayCategoria);
+    this.arrayCategoria.push(new FormGroup({
+      descripcion: this.createFormControl()
+    }));
+    console.log(this.arrayCategoria);
   }
   onRemoveCategoria(index){
-    (<FormArray>this.formCategorias.controls['arrayCategoria']).removeAt(index);
-    if( (<FormArray>this.formCategorias.controls['arrayCategoria']).length == 1){
-      this.isFirstCategoria = true;
-    }
+    console.log(this.arrayCategoria);
+    this.arrayCategoria.removeAt(index);
+    if(this.arrayCategoria.length == 1) this.isFirstCategoria = true;
+    console.log(this.arrayCategoria)
   }
   AddPorcion(){
     this.isFirstDescripcion = false;
