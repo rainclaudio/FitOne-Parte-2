@@ -2,7 +2,7 @@ import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
-import { Observable, of as observableOf, merge } from 'rxjs';
+import { Observable, of as observableOf, merge, Subscription } from 'rxjs';
 import { ItemAlimentario,InfoAlimentaria } from '../../nutricionPlan.model';
 // TODO: Replace this with your own data model type
 export interface FoodItemTableItem {
@@ -16,7 +16,7 @@ const infoAlimentaria: InfoAlimentaria =
 
 const EXAMPLE_DATA: ItemAlimentario[] = [
 
-  new ItemAlimentario('item1','Platano',89,22.84,1.09,0.33,0.1,1.22),
+
   new ItemAlimentario('item2','Protein Yogurt, lonco leche',69,5.9,10,0.6,64,5.8),
   new ItemAlimentario('item3','Pechuga Pollo',195,0,29.55,7.72,393,0),
   new ItemAlimentario('item4','Arroz',332,73.4,8,2.8,424,1),
@@ -37,6 +37,8 @@ export class FoodItemTableDataSource extends DataSource<ItemAlimentario> {
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
 
+  private itemsVectorCopy: ItemAlimentario[] = [];
+  private itemsAlimentariosSub: Subscription;
   constructor() {
     super();
   }

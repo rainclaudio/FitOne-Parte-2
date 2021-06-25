@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { Categoria, DescripcionComun } from '../nutricionPlan.model';
+import { Cantidad_item_descripcion, Categoria, DescripcionComun, ItemAlimentario, ItemEnCategoria } from '../nutricionPlan.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +9,13 @@ import { Categoria, DescripcionComun } from '../nutricionPlan.model';
 export class FoodItemsService {
   private descrcipcionVector = new BehaviorSubject<DescripcionComun[]>([]);
   private categoriaVector = new BehaviorSubject<Categoria[]>([]);
-
+  private cantidadDescripcionComunVector = new BehaviorSubject<Cantidad_item_descripcion[]>([]);
+  private ItemsAlimentariosVector = new BehaviorSubject<ItemAlimentario[]>([]);
+  private ItemEnCategoriaVector = new BehaviorSubject<ItemEnCategoria[]>([]);
   constructor() {
     const newDescripcion1 = new DescripcionComun('descripcion1','Grande');
     const newDescripcion2 = new DescripcionComun('descripcion2','Mediano');
-    const newDescripcion3= new DescripcionComun('descripcion3','Pequeño');
+    const newDescripcion3 = new DescripcionComun('descripcion3','Pequeño');
     const newDescripcion4 = new DescripcionComun('descripcion4','Scoop');
     const newDescripcion5 = new DescripcionComun('descripcion5','Taza');
     const newDescripcion6 = new DescripcionComun('descripcion6','Unidad');
@@ -65,15 +67,53 @@ export class FoodItemsService {
   get categoria(){
     return this.categoriaVector.asObservable();
   }
+  get cantidad_item_descripcion(){
+    return this.cantidadDescripcionComunVector.asObservable();
+  }
+  get Items(){
+    return this.ItemsAlimentariosVector.asObservable();
+  }
+  add_item(itemalimentario: ItemAlimentario){
+   const randomString = Math.random().toString();
+   console.log(itemalimentario);
+
+    itemalimentario.id = randomString;
+    console.log(itemalimentario);
+    this.ItemsAlimentariosVector.pipe(take(1)).subscribe((item) => {
+      console.log(itemalimentario.cho);
+      this.ItemsAlimentariosVector.next(item.concat(itemalimentario));
+    });
+    console.log('ITEMS ALIMENTARIOS');
+    console.log(this.ItemsAlimentariosVector);
+    return randomString;
+  }
+  // ESTO VA EN OTRA PARTE
   add_descripcion(descripcionvar: DescripcionComun){
     this.descrcipcionVector.pipe(take(1)).subscribe((descripcion) => {
       this.descrcipcionVector.next(descripcion.concat(descripcionvar));
     });
-
   }
+  // ESTO VA EN OTRA PARTE
   add_categoria(categoriavar: Categoria){
     this.categoriaVector.pipe(take(1)).subscribe((categoria) => {
       this.categoriaVector.next(categoria.concat(categoriavar));
     });
+
   }
+
+  add_cantidad_item_descripcion(cantidad_item_descripcion: Cantidad_item_descripcion){
+    this.cantidadDescripcionComunVector.pipe(take(1)).subscribe((cantidad) => {
+      this.cantidadDescripcionComunVector.next(cantidad.concat(cantidad_item_descripcion));
+    });
+    console.log('CANTIDAD ITEM DESCRIPCION');
+    console.log(this.cantidadDescripcionComunVector);
+  }
+  add_ItemEnCategoria(itemcategoriavar: ItemEnCategoria){
+    this.ItemEnCategoriaVector.pipe(take(1)).subscribe((itemcategoria) => {
+      this.ItemEnCategoriaVector.next(itemcategoria.concat(itemcategoriavar));
+    });
+    console.log('ITEMS EN CATEGORIA');
+    console.log(this.ItemEnCategoriaVector);
+  }
+
 }
