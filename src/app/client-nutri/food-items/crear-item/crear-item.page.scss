@@ -1,0 +1,36 @@
+.min-max-width {
+  max-width: 75%;
+  margin: 0px;
+  background-color:red;
+}
+.div1{
+
+  float:left;
+  width: 40%;
+  margin: 0 auto;
+}
+.div2{
+  float:left;
+  margin: 0 auto;
+  width: 40%;
+
+}
+.div3{
+
+  float: right;
+  width: 20%;
+}
+.row1{
+  display: flex;
+}
+.itemCategoria{
+  width: 80%;
+  float: left;
+}
+.itemTrashCategoria{
+  width:20%;
+
+  margin: 0 auto;
+  // margin: 0 auto;
+
+}

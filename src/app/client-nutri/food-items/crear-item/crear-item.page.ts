@@ -1,23 +1,17 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  NgForm,
-  Validators,
-} from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ModalController, NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { Cantidad_item_descripcion, Categoria, DescripcionComun, ItemAlimentario, ItemEnCategoria } from '../../nutricionPlan.model';
 import { FoodItemsService } from '../food-items.service';
 
 @Component({
-  selector: 'app-create-item',
-  templateUrl: './create-item.component.html',
-  styleUrls: ['./create-item.component.scss'],
+  selector: 'app-crear-item',
+  templateUrl: './crear-item.page.html',
+  styleUrls: ['./crear-item.page.scss'],
 })
-export class CreateItemComponent implements OnInit {
+export class CrearItemPage implements OnInit {
+
   customActionSheetOptions: any = {
     header: 'Descripcion',
     subHeader: 'Seleccione una descripcion',
@@ -40,7 +34,8 @@ export class CreateItemComponent implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private fb: FormBuilder,
-    private foodItemService: FoodItemsService
+    private foodItemService: FoodItemsService,
+    private navCtrl: NavController
   ) {}
   createFormControl() {
     return new FormControl(null, {
@@ -146,10 +141,9 @@ export class CreateItemComponent implements OnInit {
       }
     }
     this.resetForms();
-    this.modalCtrl.dismiss({},'confirm');
   }
   onCancelCreation() {
-    this.modalCtrl.dismiss(null, 'cancel');
+    this.navCtrl.navigateBack('client-nutri/tabs/food-items');
   }
   get gdescripcionVector() {
     return this.descripcionVectro;

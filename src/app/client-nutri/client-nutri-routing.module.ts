@@ -15,7 +15,17 @@ const routes: Routes = [
       },
       {
         path: 'food-items',
-        loadChildren: () => import('./food-items/food-items.module').then( m => m.FoodItemsPageModule)
+        children:[
+          {
+            path: '',
+            loadChildren: () => import('./food-items/food-items.module').then( m => m.FoodItemsPageModule)
+          },
+          {
+            path: 'crear-item',
+            loadChildren: () => import('./food-items/crear-item/crear-item.module').then(m => m.CrearItemPageModule)
+          }
+        ]
+
       },
       {
         path: 'client-detail',

@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge, Subscription } from 'rxjs';
 import { ItemAlimentario,InfoAlimentaria } from '../../nutricionPlan.model';
+import { FoodItemsService } from '../food-items.service';
 // TODO: Replace this with your own data model type
 export interface FoodItemTableItem {
   name: string;
@@ -14,41 +15,42 @@ export interface FoodItemTableItem {
 const infoAlimentaria: InfoAlimentaria =
   { descripcion: '1', calorias: 1, cho: 1, prot:1,fat:1,sodium:1,sugar:1}
 
-const EXAMPLE_DATA: ItemAlimentario[] = [
-
-
-  new ItemAlimentario('item2','Protein Yogurt, lonco leche',69,5.9,10,0.6,64,5.8),
-  new ItemAlimentario('item3','Pechuga Pollo',195,0,29.55,7.72,393,0),
-  new ItemAlimentario('item4','Arroz',332,73.4,8,2.8,424,1),
-  new ItemAlimentario('item5','Avena Multisemillas Quaker',376,56,13,9.9,4.9,1.3),
-  new ItemAlimentario('item6','Egg',141,0.68,12.7,9.7,360,0),
-  new ItemAlimentario('item7','Carne Magra',138,2,24,3,86,10),
-  new ItemAlimentario('item8','Pan Hallulla',309,62,8,4,122,0)
-  // {id: '1',descripcion: '1', calorias: 1, cho: 1, prot:1,fat:1,sodium:1,sugar:1},
-];
-
 /**
  * Data source for the FoodItemTable view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
 export class FoodItemTableDataSource extends DataSource<ItemAlimentario> {
-  data: ItemAlimentario[] = EXAMPLE_DATA;
+  data: ItemAlimentario[] = [];
+  dataSub: Subscription;
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
 
   private itemsVectorCopy: ItemAlimentario[] = [];
   private itemsAlimentariosSub: Subscription;
-  constructor() {
+  constructor(itemdata: Observable<ItemAlimentario[]>) {
     super();
+    console.log("construcytor");
+    this.dataSub = itemdata.subscribe(itemsalimentarios => {
+      this.data = itemsalimentarios;
+    });
   }
+  assign_data(assdata:ItemAlimentario[]){
+    this.data = assdata;
+  }
+  add_data(itemdata: Observable<ItemAlimentario>){
 
+  }
+  on_destroy(){
+    if(this.dataSub) this.dataSub.unsubscribe();
+  }
   /**
    * Connect this data source to the table. The table will only update when
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
   connect(): Observable<ItemAlimentario[]> {
+    console.log("holas DATASOURSE");
     if (this.paginator && this.sort) {
       // Combine everything that affects the rendered data into one update
       // stream for the data-table to consume.
@@ -65,7 +67,9 @@ export class FoodItemTableDataSource extends DataSource<ItemAlimentario> {
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
    */
-  disconnect(): void {}
+  disconnect(): void {
+    console.log("destroying");
+  }
 
   /**
    * Paginate the data (client-side). If you're using server-side pagination,

@@ -7,7 +7,12 @@ const routes: Routes = [
   {
     path: '',
     component: FoodItemsPage
-  }
+  },
+  {
+    path: 'crear-item',
+    loadChildren: () => import('./crear-item/crear-item.module').then( m => m.CrearItemPageModule)
+  },
+
 ];
 
 @NgModule({
