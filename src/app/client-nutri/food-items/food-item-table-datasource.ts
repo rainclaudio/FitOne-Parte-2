@@ -3,8 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge, Subscription } from 'rxjs';
-import { ItemAlimentario,InfoAlimentaria } from '../../nutricionPlan.model';
-import { FoodItemsService } from '../food-items.service';
+import { InfoAlimentaria, ItemAlimentario } from '../nutricionPlan.model';
+// import { ItemAlimentario,InfoAlimentaria } from '../../nutricionPlan.model';
 // TODO: Replace this with your own data model type
 export interface FoodItemTableItem {
   name: string;
@@ -35,7 +35,15 @@ export class FoodItemTableDataSource extends DataSource<ItemAlimentario> {
       this.data = itemsalimentarios;
     });
   }
+  assign_data(assdata:ItemAlimentario[]){
+    this.data = assdata;
+  }
+  add_data(itemdata: Observable<ItemAlimentario>){
 
+  }
+  on_destroy(){
+    if(this.dataSub) this.dataSub.unsubscribe();
+  }
   /**
    * Connect this data source to the table. The table will only update when
    * the returned stream emits new items.

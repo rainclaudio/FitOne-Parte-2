@@ -251,7 +251,7 @@ export class MedicionesService {
           if(auth){
             console.log("user auth!");
             console.log(auth.uid);
-          }
+
         })*/
         return this.firestore.collection('Informe', ref => ref.where('id_nutri','==',fetchedUserId).where('id_user','==',id_user)).snapshotChanges();
 

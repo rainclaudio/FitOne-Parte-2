@@ -1,4 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { IonicModule } from '@ionic/angular';
 
 import { FoodItemsPage } from './food-items.page';
@@ -10,7 +14,12 @@ describe('FoodItemsPage', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ FoodItemsPage ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot(),
+        NoopAnimationsModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatTableModule,
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(FoodItemsPage);

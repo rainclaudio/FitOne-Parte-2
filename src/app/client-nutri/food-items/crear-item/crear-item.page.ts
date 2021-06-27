@@ -1,3 +1,4 @@
+import { findLast } from '@angular/compiler/src/directive_resolver';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController, NavController } from '@ionic/angular';
@@ -52,13 +53,13 @@ export class CrearItemPage implements OnInit {
     return form_control;
   }
   ngOnInit() {
-    this.descripcionSub = this.foodItemService.descripcion.subscribe(
+    this.descripcionSub = this.foodItemService.Descripcion.subscribe(
       (descripcion) => {
         this.descripcionVectro = descripcion;
       }
     );
 
-    this.categoriaSub = this.foodItemService.categoria.subscribe(
+    this.categoriaSub = this.foodItemService.Categoria.subscribe(
       (categoria) => {
         this.categoriaVector = categoria;
       }
@@ -103,44 +104,75 @@ export class CrearItemPage implements OnInit {
     ) {
       return;
     }
-    const last_item_id = this.foodItemService.add_item(
-      new ItemAlimentario(
-        'borrable',
-        this.formcreateItem.value.descripcion,
-        this.formcreateItem.value.calorias,
-        this.formcreateItem.value.carbohidratos,
-        this.formcreateItem.value.proteinas,
-        this.formcreateItem.value.grasas,
-        this.formcreateItem.value.sodio,
-        this.formcreateItem.value.azucar
-      )
-      );
+    this.foodItemService.add_toFirestore(
+      {
+       id:  'borrable',
+       descripcion: this.formcreateItem.value.descripcion,
+       calorias:  this.formcreateItem.value.calorias,
+       cho:  this.formcreateItem.value.carbohidratos,
+       prot:  this.formcreateItem.value.proteinas,
+       fat:  this.formcreateItem.value.grasas,
+       sodium:  this.formcreateItem.value.sodio,
+       sugar:  this.formcreateItem.value.azucar
+      },
+      {
+        descripcion: this.formcreateItem.value.descripcion,
+        calorias:  this.formcreateItem.value.calorias,
+        cho:  this.formcreateItem.value.carbohidratos,
+        prot:  this.formcreateItem.value.proteinas,
+        fat:  this.formcreateItem.value.grasas,
+        sodium:  this.formcreateItem.value.sodio,
+        sugar:  this.formcreateItem.value.azucar
+      },
+      'ItemAlimentario',
+      false
+    ).subscribe( () => {
+      for (let control of this.arrayP.controls) {
+        if (control instanceof FormGroup) {
+          console.log(control);
+          this.foodItemService.add_toFirestore(
+            {
+              id: 'borrable',
+              id_item: this.foodItemService.lastItemAlimentario,
+              id_descripcion: control.value.descripcion.id,
+              gramos: control.value.gramosporporcion
+            },
+            {
+              id_item: this.foodItemService.lastItemAlimentario,
+              id_descripcion: control.value.descripcion.id,
+              gramos: control.value.gramosporporcion
+            },
+            'CantidadItemDescripcion',
+            false
+          ).subscribe( () => {
 
-    for (let control of this.arrayP.controls) {
-      if (control instanceof FormGroup) {
-        this.foodItemService.add_cantidad_item_descripcion(
-          new Cantidad_item_descripcion(
-            'borrable',
-            last_item_id,
-            control.value.descripcion.id,
-            control.value.gramosporporcion
-          )
-        );
+          });
+        }
       }
-    }
-    for (let control of this.arrayCategoria.controls) {
-      if (control instanceof FormGroup) {
-        this.foodItemService.add_ItemEnCategoria(
-          new ItemEnCategoria(
-            'borrable',
-            last_item_id,
-            control.value.descripcion.id
-          )
-        )
-        console.log(control.value.descripcion.descripcion);
+      console.log("passing this line");
+      for (let control of this.arrayCategoria.controls) {
+        if (control instanceof FormGroup) {
+          this.foodItemService.add_toFirestore(
+            {
+              id: 'borrable',
+              id_item: this.foodItemService.lastItemAlimentario,
+              id_categoria: control.value.descripcion.id
+            },
+            {
+              id_item: this.foodItemService.lastItemAlimentario,
+              id_categoria: control.value.descripcion.id
+            },
+            'ItemEnCategoria',
+            false
+          ).subscribe( () => {
+
+          });
+
+          console.log(control.value.descripcion.descripcion);
+        }
       }
-    }
-    this.resetForms();
+    })
+    // this.resetForms();
   }
   onCancelCreation() {
     this.navCtrl.navigateBack('client-nutri/tabs/food-items');

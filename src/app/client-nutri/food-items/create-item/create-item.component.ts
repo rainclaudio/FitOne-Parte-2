@@ -57,13 +57,13 @@ export class CreateItemComponent implements OnInit {
     return form_control;
   }
   ngOnInit() {
-    this.descripcionSub = this.foodItemService.descripcion.subscribe(
+    this.descripcionSub = this.foodItemService.Descripcion.subscribe(
       (descripcion) => {
         this.descripcionVectro = descripcion;
       }
     );
 
-    this.categoriaSub = this.foodItemService.categoria.subscribe(
+    this.categoriaSub = this.foodItemService.Categoria.subscribe(
       (categoria) => {
         this.categoriaVector = categoria;
       }
@@ -101,52 +101,52 @@ export class CreateItemComponent implements OnInit {
     this.formcreateItem.reset();
   }
   onCreateItem() {
-    if (
-      !this.formcreateItem.valid ||
-      !this.arrayP.valid ||
-      !this.arrayCategoria.valid
-    ) {
-      return;
-    }
-    const last_item_id = this.foodItemService.add_item(
-      new ItemAlimentario(
-        'borrable',
-        this.formcreateItem.value.descripcion,
-        this.formcreateItem.value.calorias,
-        this.formcreateItem.value.carbohidratos,
-        this.formcreateItem.value.proteinas,
-        this.formcreateItem.value.grasas,
-        this.formcreateItem.value.sodio,
-        this.formcreateItem.value.azucar
-      )
-      );
+    // if (
+    //   !this.formcreateItem.valid ||
+    //   !this.arrayP.valid ||
+    //   !this.arrayCategoria.valid
+    // ) {
+    //   return;
+    // }
+    // const last_item_id = this.foodItemService.add_item(
+    //   new ItemAlimentario(
+    //     'borrable',
+    //     this.formcreateItem.value.descripcion,
+    //     this.formcreateItem.value.calorias,
+    //     this.formcreateItem.value.carbohidratos,
+    //     this.formcreateItem.value.proteinas,
+    //     this.formcreateItem.value.grasas,
+    //     this.formcreateItem.value.sodio,
+    //     this.formcreateItem.value.azucar
+    //   )
+    //   );
 
-    for (let control of this.arrayP.controls) {
-      if (control instanceof FormGroup) {
-        this.foodItemService.add_cantidad_item_descripcion(
-          new Cantidad_item_descripcion(
-            'borrable',
-            last_item_id,
-            control.value.descripcion.id,
-            control.value.gramosporporcion
-          )
-        );
-      }
-    }
-    for (let control of this.arrayCategoria.controls) {
-      if (control instanceof FormGroup) {
-        this.foodItemService.add_ItemEnCategoria(
-          new ItemEnCategoria(
-            'borrable',
-            last_item_id,
-            control.value.descripcion.id
-          )
-        )
-        console.log(control.value.descripcion.descripcion);
-      }
-    }
-    this.resetForms();
-    this.modalCtrl.dismiss({},'confirm');
+    // for (let control of this.arrayP.controls) {
+    //   if (control instanceof FormGroup) {
+    //     this.foodItemService.add_cantidad_item_descripcion(
+    //       new Cantidad_item_descripcion(
+    //         'borrable',
+    //         this.foodItemService.lastItemAlimentario,
+    //         control.value.descripcion.id,
+    //         control.value.gramosporporcion
+    //       )
+    //     );
+    //   }
+    // }
+    // for (let control of this.arrayCategoria.controls) {
+    //   if (control instanceof FormGroup) {
+    //     this.foodItemService.add_ItemEnCategoria(
+    //       new ItemEnCategoria(
+    //         'borrable',
+    //         this.foodItemService.lastItemAlimentario,
+    //         control.value.descripcion.id
+    //       )
+    //     )
+    //     console.log(control.value.descripcion.descripcion);
+    //   }
+    // }
+    // this.resetForms();
+    // this.modalCtrl.dismiss({},'confirm');
   }
   onCancelCreation() {
     this.modalCtrl.dismiss(null, 'cancel');
