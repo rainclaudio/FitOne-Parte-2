@@ -104,6 +104,13 @@ export class CrearItemPage implements OnInit {
     ) {
       return;
     }
+    let answerItemCategoria = [];
+    for(let control of this.arrayCategoria.controls){
+      if(control instanceof FormGroup){
+        answerItemCategoria.push(control.value.descripcion.id);
+      }
+    }
+
     this.foodItemService.add_toFirestore(
       {
        id:  'borrable',
@@ -113,7 +120,8 @@ export class CrearItemPage implements OnInit {
        prot:  this.formcreateItem.value.proteinas,
        fat:  this.formcreateItem.value.grasas,
        sodium:  this.formcreateItem.value.sodio,
-       sugar:  this.formcreateItem.value.azucar
+       sugar:  this.formcreateItem.value.azucar,
+       categoria: answerItemCategoria
       },
       {
         descripcion: this.formcreateItem.value.descripcion,
@@ -122,7 +130,8 @@ export class CrearItemPage implements OnInit {
         prot:  this.formcreateItem.value.proteinas,
         fat:  this.formcreateItem.value.grasas,
         sodium:  this.formcreateItem.value.sodio,
-        sugar:  this.formcreateItem.value.azucar
+        sugar:  this.formcreateItem.value.azucar,
+        categoria: answerItemCategoria
       },
       'ItemAlimentario',
       false
@@ -167,8 +176,7 @@ export class CrearItemPage implements OnInit {
           ).subscribe( () => {
 
           });
-
-          console.log(control.value.descripcion.descripcion);
+          this.navCtrl.navigateBack('client-nutri/tabs/food-items');
         }
       }
     })

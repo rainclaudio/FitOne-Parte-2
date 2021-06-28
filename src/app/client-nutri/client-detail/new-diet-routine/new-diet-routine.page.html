@@ -17,171 +17,303 @@
           </ion-card-header>
           <ion-card-content>
             <ion-grid>
-                <ion-row>
-                  <ion-col class="colEspacio" size-sm = 4>
+              <ion-row>
+                <ion-col class="colEspacio" size-sm="4"> </ion-col>
+                <ion-col size-sm="4">
+                  <p style="text-align: center">Porcentaje</p>
+                </ion-col>
+                <ion-col size-sm="4">
+                  <p style="text-align: center">Gramos</p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size-sm="4">
+                  <div class="header">
+                    <div class="title">Proteínas</div>
+                  </div>
+                </ion-col>
+                <ion-col size-sm="4">
+                  <p style="text-align: center">{{gmacroProteinPercent}}</p>
+                </ion-col>
+                <ion-col size-sm="4">
+                  <p style="text-align: center">{{gmacroProteinGram}}</p>
+                </ion-col>
+              </ion-row>
 
-                  </ion-col>
-                  <ion-col size-sm =4>
-                    <p style="text-align: center;">Porcentaje</p>
-                  </ion-col>
-                  <ion-col size-sm = 4>
-                    <p style="text-align: center;">Gramos</p>
-                  </ion-col>
-
-                </ion-row>
-                <ion-row>
-                  <ion-col size-sm = 4>
-                    <div class="header">
-                      <div class="title">Proteínas</div>
-                    </div>
-                  </ion-col>
-                  <ion-col size-sm = 4>
-
-                    <p style="text-align: center;">{{gmacroProteinPercent}}</p>
-                  </ion-col>
-                  <ion-col size-sm = 4>
-                    <p style="text-align: center;">{{gmacroProteinGram}}</p>
-                  </ion-col>
-
-                </ion-row>
-
-                <ion-row>
-                  <ion-col size-sm = 4>
-                    <ion-range
+              <ion-row>
+                <ion-col size-sm="4">
+                  <ion-range
                     min="0"
                     max="100"
                     value="35"
                     pin="true"
-                    snaps = true
-                    ticks = true
-                    step = 5
+                    snaps="true"
+                    ticks="true"
+                    step="5"
                     color="success"
                     class="ion-padding-inline"
                     (ionChange)="proteinChangeSlider($event)"
                   >
                   </ion-range>
-                  </ion-col>
+                </ion-col>
+              </ion-row>
 
-                </ion-row>
+              <ion-row>
+                <ion-col size-sm="4">
+                  <div class="header">
+                    <div class="title">Carbohidratos</div>
+                  </div>
+                </ion-col>
+                <ion-col size-sm="4">
+                  <p style="text-align: center">{{gmacroCarboPercent}}</p>
+                </ion-col>
+                <ion-col size-sm="4">
+                  <p style="text-align: center">{{gmacroCarboGram}}</p>
+                </ion-col>
+              </ion-row>
 
-                <ion-row>
-                  <ion-col size-sm = 4>
-                    <div class="header">
-                      <div class="title">Carbohidratos</div>
-
-                    </div>
-                  </ion-col>
-                  <ion-col size-sm = 4>
-                    <p style="text-align: center;">{{gmacroCarboPercent}}</p>
-
-                  </ion-col>
-                  <ion-col size-sm = 4>
-                    <p style="text-align: center;">{{gmacroCarboGram}}</p>
-                    </ion-col>
-
-                </ion-row>
-
-                <ion-row>
-                  <ion-col size-sm = 4>
-                    <ion-range
+              <ion-row>
+                <ion-col size-sm="4">
+                  <ion-range
                     min="0"
                     max="100"
                     value="50"
-                    step = 5
-                    snaps = true
-                    ticks = true
+                    step="5"
+                    snaps="true"
+                    ticks="true"
                     pin="true"
                     color="warning"
                     class="ion-padding-inline"
                     (ionChange)="carbosChangeSlider($event)"
                   >
                   </ion-range>
-                  </ion-col>
+                </ion-col>
+              </ion-row>
 
+              <ion-row>
+                <ion-col size-sm="4">
+                  <div class="header">
+                    <div class="title">Grasas</div>
+                  </div>
+                </ion-col>
+                <ion-col size-sm="4">
+                  <p style="text-align: center">{{gmacroFatPercent}}</p>
+                </ion-col>
+                <ion-col size-sm="4">
+                  <p style="text-align: center">{{gmacroFatGram}}</p>
+                </ion-col>
+              </ion-row>
 
-
-
-                </ion-row>
-
-                <ion-row>
-                  <ion-col size-sm = 4>
-                    <div class="header">
-                      <div class="title">Grasas</div>
-
-                    </div>
-                  </ion-col>
-                  <ion-col size-sm = 4>
-                    <p style="text-align: center;">{{gmacroFatPercent}}</p>
-
-                  </ion-col>
-                  <ion-col size-sm = 4>
-                    <p
-                    style="text-align: center;">{{gmacroFatGram}}</p>
-                  </ion-col>
-
-                </ion-row>
-
-                <ion-row>
-                  <ion-col size-sm = 4>
-                    <ion-range
+              <ion-row>
+                <ion-col size-sm="4">
+                  <ion-range
                     min="0"
                     max="100"
                     value="15"
-                    step = 5
-                    snaps = true
-                    ticks = true
+                    step="5"
+                    snaps="true"
+                    ticks="true"
                     pin="true"
                     color="danger"
                     class="ion-padding-inline"
                     (ionChange)="fatChangeSlider($event)"
                   >
                   </ion-range>
-                  </ion-col>
-
-                </ion-row>
-                <ion-row>
-                  <ion-col size-sm = 4>
-
-                  </ion-col>
-                  <ion-col size-sm = 4>
-
-                    <p *ngIf ="gtotalPercent != 100" style="color: red; text-align: center;">{{gtotalPercent}}</p>
-                    <p *ngIf ="gtotalPercent == 100" style="color: green; text-align: center;">{{gtotalPercent}}</p>
-
-                  </ion-col>
-                </ion-row>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size-sm="4"> </ion-col>
+                <ion-col size-sm="4">
+                  <p
+                    *ngIf="gtotalPercent != 100"
+                    style="color: red; text-align: center"
+                  >
+                    {{gtotalPercent}}
+                  </p>
+                  <p
+                    *ngIf="gtotalPercent == 100"
+                    style="color: green; text-align: center"
+                  >
+                    {{gtotalPercent}}
+                  </p>
+                </ion-col>
+              </ion-row>
             </ion-grid>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
+
     <ion-row>
-      <ion-card>
-        <ion-card-content>
-          <table class="table">
-            <thead>
-              <tr class="table-dagner">
-                <th>Mediciones Básicas</th>
-                <th>15/10/19</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">Peso corporal (kg)</th>
-                <td>hola</td>
-              </tr>
-              <tr>
-                <th scope="row">Estatura máxima (cm)</th>
-                <td></td>
-              </tr>
-              <tr>
-                <th scope="row">Estatura Sentado (cm)</th>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </ion-card-content>
-      </ion-card>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Porciones de Intercambio</ion-card-title>
+            <ion-card-subtitle
+              >Por favor, defina las porciones de intercambio</ion-card-subtitle
+            >
+          </ion-card-header>
+          <ion-card-content>
+            <ion-grid>
+              <ion-row class="mat-elevation-z0">
+                <ion-col>
+                  <form [formGroup]="formPorcionesDeIntercambio" class="row1">
+                    <ion-item style="width: 25%">
+                      <ion-label position="stacked">Categoria</ion-label>
+                      <ion-select
+                        formControlName="categoria"
+                        [interfaceOptions]="customActionSheetOptions"
+                        interface="popover"
+                        placeholder="Select One"
+                      >
+                        <ion-select-option
+                          *ngFor="let it of Categoria"
+                          [value]="it"
+                          >{{ it.descripcion }}</ion-select-option
+                        >
+                      </ion-select>
+                    </ion-item>
+
+                    <ion-item style="width: 15%">
+                      <ion-label position="stacked">N° Porciones</ion-label>
+                      <ion-input
+                        type="number"
+                        formControlName="porciones"
+                      ></ion-input>
+                    </ion-item>
+
+                    <ion-item style="width: 25%">
+                      <ion-label position="stacked">Cantidad[gr]</ion-label>
+                      <ion-input
+                        type="number"
+                        formControlName="gramosporporcion"
+                      ></ion-input>
+                    </ion-item>
+
+                    <ion-item style="width: 15%">
+                      <ion-label position="stacked">Condición</ion-label>
+                      <ion-select
+                        formControlName="condicion"
+                        interface="popover"
+                        placeholder="Select One"
+                      >
+                        <ion-select-option value="cocido"
+                          >Cocido</ion-select-option
+                        >
+                        <ion-select-option value="crudo"
+                          >Crudo</ion-select-option
+                        >
+                      </ion-select>
+                    </ion-item>
+
+                    <ion-item style="width: 10%" lines="none">
+                      <ion-button
+                        shape="round"
+                        size="big"
+                        (click)="onAddPrepPorcion()"
+                        [disabled]="!formPorcionesDeIntercambio.valid"
+                      >
+                        <ion-icon name="add"> </ion-icon>
+                      </ion-button>
+                    </ion-item>
+                  </form>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <div class="mat-elevation-z2">
+                    <table
+                      mat-table
+                      class="full-width-table"
+                      matSort
+                      aria-label="Elements"
+                    >
+                      <ng-container matColumnDef="categoria">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                          Categoria
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                          {{row.categoria}}
+                        </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="porciones">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                          Porciones
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                          {{row.porciones}}
+                        </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="gramosporporcion">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                          Gramos por porción
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                          {{row.gramosporporcion}}
+                        </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="condicion">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                          Condición
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                          {{row.condicion}}
+                        </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="carbohidratos">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                          Carbohidratos
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                          {{row.carbohidratos}}
+                        </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="lipidos">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                          Lípidos
+                        </th>
+                        <td mat-cell *matCellDef="let row">{{row.lipidos}}</td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="proteinas">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                          Proteínas
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                          {{row.proteinas}}
+                        </td>
+                      </ng-container>
+
+                      <tr
+                        mat-header-row
+                        *matHeaderRowDef="displayedColumns"
+                      ></tr>
+                      <tr
+                        mat-row
+                        *matRowDef="let row; columns: displayedColumns;"
+                      ></tr>
+                    </table>
+
+                    <mat-paginator
+                      #paginator
+                      [length]="dataSource?.data?.length"
+                      [pageIndex]="0"
+                      [pageSize]="10"
+                      [pageSizeOptions]="[5, 10, 20]"
+                    >
+                    </mat-paginator>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

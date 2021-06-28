@@ -68,9 +68,20 @@ export class PreparacionDePorciones{
     public id_condicion: string,
     public num_porciones: number,
     public gramos_por_porcion:number,
+    public carbohidratos: number,
+    public lipidos: number,
+    public proteinas: number
   ){}
 }
-
+export interface displayPreparacionDePorciones{
+  categoria: string,
+  porciones: number,
+  gramosporporcion: number,
+  condicion: string,
+  carbohidratos: number,
+  lipidos: number,
+  proteinas: number
+}
 
 // EXTRA: ITEMS ALIMENTARIOS y RECETAS
 
@@ -96,6 +107,7 @@ export class ItemAlimentario  {
   public fat: number,
   public sodium: number,
   public sugar: number,
+  public categoria: string[]
   ){}
 }
 export class DescripcionComun{

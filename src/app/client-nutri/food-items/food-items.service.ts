@@ -14,34 +14,7 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/firestore';
 
-const EXAMPLE_DATA: ItemAlimentario[] = [
-  new ItemAlimentario(
-    'item2',
-    'Protein Yogurt, lonco leche',
-    69,
-    5.9,
-    10,
-    0.6,
-    64,
-    5.8
-  ),
-  new ItemAlimentario('item3', 'Pechuga Pollo', 195, 0, 29.55, 7.72, 393, 0),
-  new ItemAlimentario('item4', 'Arroz', 332, 73.4, 8, 2.8, 424, 1),
-  new ItemAlimentario(
-    'item5',
-    'Avena Multisemillas Quaker',
-    376,
-    56,
-    13,
-    9.9,
-    4.9,
-    1.3
-  ),
-  new ItemAlimentario('item6', 'Egg', 141, 0.68, 12.7, 9.7, 360, 0),
-  new ItemAlimentario('item7', 'Carne Magra', 138, 2, 24, 3, 86, 10),
-  new ItemAlimentario('item8', 'Pan Hallulla', 309, 62, 8, 4, 122, 0),
-  // {id: '1',descripcion: '1', calorias: 1, cho: 1, prot:1,fat:1,sodium:1,sugar:1},
-];
+
 
 @Injectable({
   providedIn: 'root',
@@ -263,7 +236,7 @@ export class FoodItemsService {
         );
       }),
       switchMap((resData) => {
-        // this.lastiditemalimentario = resData.id;
+        this.lastiditemalimentario = resData.id;
         // this.last_id_info = resData.id;
         // itemalimentario.id = resData.id;
         data_to_concat.id = resData.id;
@@ -327,7 +300,8 @@ export class FoodItemsService {
                 it.data.prot,
                 it.data.fat,
                 it.data.sodium,
-                it.data.sugar
+                it.data.sugar,
+                it.data.categoria
               )
             );
           }
@@ -390,6 +364,46 @@ export class FoodItemsService {
         this.ItemsAlimentariosVector.next(
           this.get_ArrayData(collectionFR, datarecieved)
         );
+      })
+    );
+  }
+  getQuery(collectionFR: string, querys: string[]) {
+    let fetchedUserId: string;
+
+    let noLocalVector = new BehaviorSubject<any[]>([]);
+    // console.log("holas");
+    return this.authService.userId.pipe(
+      take(1),
+      switchMap((userId) => {
+        if (!userId) {
+          throw new Error('User not found');
+        }
+        fetchedUserId = userId;
+        console.log("performing");
+        return this.firestore
+          .collection(collectionFR, (ref) =>
+            ref.where('categoria', 'array-contains', querys[0])
+          )
+          .snapshotChanges();
+      }),
+      map((returnedData) => {
+        // console.log(returnedData);
+        const datatoSave = [];
+
+        returnedData.forEach((returnedData) => {
+          var varinfo = {
+            id: returnedData.payload.doc.id,
+            data: returnedData.payload.doc.data(),
+          };
+          datatoSave.push(varinfo);
+        });
+        return datatoSave;
+      }),
+      tap((datarecieved) => {
+        // console.log(this.get_ArrayData(collectionFR,datarecieved));
+        noLocalVector.next(this.get_ArrayData(collectionFR, datarecieved));
+        return noLocalVector;
+        // console.log(noLocalVector);
       })
     );
   }

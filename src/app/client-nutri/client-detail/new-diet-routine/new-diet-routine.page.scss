@@ -89,3 +89,41 @@ body {
   padding-right: 15px;
   padding-left: 15px;
 }
+.min-max-width {
+  max-width: 75%;
+  margin: 0px;
+  background-color:red;
+}
+.div1{
+
+  float:left;
+  width: 30%;
+  margin: 0 auto;
+}
+.div2{
+  float:left;
+  margin: 0 auto;
+  width: 30%;
+
+}
+.div3{
+  float: right;
+  width: 15%;
+}
+.div4{
+  float: right;
+}
+.row1{
+  display: flex;
+}
+.itemCategoria{
+  width: 80%;
+  float: left;
+}
+.itemTrashCategoria{
+  width:20%;
+
+  margin: 0 auto;
+  // margin: 0 auto;
+
+}
