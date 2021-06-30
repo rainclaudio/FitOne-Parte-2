@@ -19,6 +19,7 @@ import {
   Inter_Evaluation,
   Inter_Informe,
 } from '../../evaluation.model';
+import { ClientsService } from '../../clients.service';
 @Component({
   selector: 'app-new-evaluation',
   templateUrl: './new-evaluation.page.html',
@@ -38,7 +39,8 @@ export class NewEvaluationPage implements OnInit {
     private router: Router,
     private navController: NavController,
     private medicionesService: MedicionesService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private clientService: ClientsService
   ) {}
   createFormControl() {
     return new FormControl(null, {
@@ -62,7 +64,7 @@ export class NewEvaluationPage implements OnInit {
       }
       this.id_client = pmap.get('id_client');
       console.log(this.id_client);
-      this.clientSub = this.medicionesService
+      this.clientSub = this.clientService
         .getClient(this.id_client)
         .subscribe((client) => {
           this.clientitem = client;

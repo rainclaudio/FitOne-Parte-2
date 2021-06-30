@@ -1,9 +1,91 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>new-client</ion-title>
+    <ion-title style="text-align: center; ">Registrar el Cliente</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-grid>
+    <ion-row class="mat-elevation-z0">
+      <ion-col>
+        <form [formGroup]="formNewClient">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-list>
+                  <ion-item>
+                    <ion-label position="floating">Nombres</ion-label>
+                    <!-- Number type input -->
+                    <ion-input
+                      type="text"
+                      formControlName="nombres"
+                    ></ion-input>
+                  </ion-item>
 
+                  <ion-item>
+                    <ion-label position="floating">Apellidos</ion-label>
+                    <ion-input
+                      type="text"
+                      formControlName="apellidos"
+                    ></ion-input>
+                  </ion-item>
+
+                  <ion-item class="div1">
+                    <ion-label position="stacked">Genero</ion-label>
+                    <ion-select
+                      formControlName="genero"
+                      interface="popover"
+                      placeholder="Select One"
+                    >
+                      <ion-select-option value = "f">Femenino</ion-select-option>
+                      <ion-select-option value = "m">Masculino</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+
+
+                  <ion-item>
+                    <ion-label position="floating">Edad</ion-label>
+                    <ion-input
+                      type="number"
+                      formControlName="edad"
+                    ></ion-input>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label position="floating">Telefono</ion-label>
+                    <ion-input
+                      type="number"
+                      formControlName="telefono"
+                    ></ion-input>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label position="floating">Correo Electrónico</ion-label>
+                    <ion-input
+                      type="email"
+                      formControlName="correo_electronico"
+                    ></ion-input>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label position="floating">Ocupación</ion-label>
+                    <ion-input
+                      type="text"
+                      formControlName="ocupacion"
+                    ></ion-input>
+                  </ion-item>
+
+
+
+                </ion-list>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-button (click) = "onCreateClient()">Añadir Cliente</ion-button>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

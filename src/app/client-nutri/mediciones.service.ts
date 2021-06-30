@@ -46,87 +46,8 @@ export class MedicionesService {
 
   constructor(private http: HttpClient, private authService: AuthService,
     private firestore: AngularFirestore) {
-    const newClient = new clientItem(
-      'cliente1',
-      'Claudio Javier',
-      'Rain Levican',
-      958636700,
-      'rainclaudio25@gmail.com',
-      'estudiante Ingeniería'
-    );
-    const newClient2 = new clientItem(
-      'cliente2',
-      'Almendra Anaís',
-      'Castillo Villaroel',
-      912334533,
-      'almendra@gmai.com',
-      'estudiante Profesora'
-    );
-    this.addClient(
-      'Almendra Anaís',
-      'Castillo Villaroel',
-      912334533,
-      'almendra@gmai.com',
-      'estudiante Profesora'
-    );
-    this.clientVector.pipe(take(1)).subscribe((clients) => {
-      this.clientVector.next(clients.concat(newClient));
-    });
-    this.clientVector.pipe(take(1)).subscribe((clients) => {
-      this.clientVector.next(clients.concat(newClient2));
-    });
   }
-  get clients() {
-    return this.clientVector.asObservable();
-  }
-  getClient(id_client: string) {
-    return this.clientVector.pipe(
-      take(1),
-      map((client) => {
-        return { ...client.find((p) => (p.id_client = id_client)) };
-      })
-    );
-  }
-  addClient(
-    nombres: string,
-    apellidos: string,
-    numero: number,
-    correo: string,
-    ocupacion: string
-  ) {
-    let generatedId: string;
-    const newClient = new clientItem(
-      Math.random().toString(),
-      nombres,
-      apellidos,
-      numero,
-      correo,
-      ocupacion
-    );
-    console.log('posting client');
-    return this.http
-      .post(
-        'https://fit-one-3408c-default-rtdb.firebaseio.com/client-inf.json',
-        {
-          ...newClient,
-          id: null,
-        }
-      )
-      .pipe(
-        tap((resData) => {
-          console.log(resData);
-        })
-        // switchMap(resData => {
-        //   generatedId = resData.name;
-        //   return this.clientVector;
-        // }),
-        // take(1),
-        // tap(clients => {
-        //   newClient.id_client = generatedId;
-        //   this.clientVector.next(clients.concat(newClient));
-        // })
-      );
-  }
+
   publish_informe(classInforme: any) {
     console.log("PUBLISHING INFORME");
     let fetchedUserId: string;

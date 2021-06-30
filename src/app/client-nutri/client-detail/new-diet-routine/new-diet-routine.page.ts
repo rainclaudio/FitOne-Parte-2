@@ -20,6 +20,7 @@ import {
   _MatTableDataSource,
 } from '@angular/material/table';
 import { map } from 'rxjs/operators';
+import { ClientsService } from '../../clients.service';
 
 @Component({
   selector: 'app-new-diet-routine',
@@ -71,6 +72,7 @@ export class NewDietRoutinePage implements OnInit, OnDestroy {
     private router: Router,
     private navController: NavController,
     private medicionesService: MedicionesService,
+    private clientService: ClientsService,
     private foodItemService: FoodItemsService,
     private modalCtrl: ModalController
   ) {}
@@ -93,7 +95,7 @@ export class NewDietRoutinePage implements OnInit, OnDestroy {
 
       this.id_client = pmap.get('id_client');
       console.log(this.id_client);
-      this.clientSub = this.medicionesService
+      this.clientSub = this.clientService
         .getClient(this.id_client)
         .subscribe((client) => {
           this.clientItem = client;
@@ -115,6 +117,7 @@ export class NewDietRoutinePage implements OnInit, OnDestroy {
   }
 
   setup_macros() {
+    this.totalCalories = 2000;
     this.macroCarboPercent = 50;
     this.macroFatPercent = 15;
     this.macroProteinPercent = 35;
@@ -180,12 +183,23 @@ export class NewDietRoutinePage implements OnInit, OnDestroy {
         promproteinas /=datarecieved.length;
         promlipidos /= datarecieved.length;
 
-
+    if(this.formPorcionesDeIntercambio.value.categoria.descripcion === 'Cereales'){
+      promcarbohidratos = promcarbohidratos *3;
+      promlipidos = promlipidos*3;
+      promproteinas = promproteinas*3;
+    }
+    if(this.formPorcionesDeIntercambio.value.categoria.descripcion === 'Carnes'){
+      promcarbohidratos = promcarbohidratos + (promcarbohidratos*20)/100;
+      promproteinas = promproteinas + (promproteinas*20)/100;
+      promlipidos = promlipidos + (promlipidos*20)/100;
+    }
+    const totalCalories = 0;
     const answer: displayPreparacionDePorciones = {
       categoria: this.formPorcionesDeIntercambio.value.categoria.descripcion,
       porciones: this.formPorcionesDeIntercambio.value.porciones,
       gramosporporcion: this.formPorcionesDeIntercambio.value.gramosporporcion,
       condicion: this.formPorcionesDeIntercambio.value.condicion,
+      calorias: promlipidos*9 + promcarbohidratos*4 + promproteinas*4,
       carbohidratos: promcarbohidratos,
       lipidos: promlipidos,
       proteinas: promproteinas,

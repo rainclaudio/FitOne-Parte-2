@@ -78,6 +78,7 @@ export interface displayPreparacionDePorciones{
   porciones: number,
   gramosporporcion: number,
   condicion: string,
+  calorias: number,
   carbohidratos: number,
   lipidos: number,
   proteinas: number
@@ -137,13 +138,7 @@ export class ItemEnCategoria{
 export class Categoria{
   constructor(
     public id: string,
-    public descripcion: string,
-  public calorias: number,
-  public cho: number,
-  public prot: number,
-  public fat: number,
-  public sodium: number,
-  public sugar: number,
+    public descripcion: string
   ){}
 }
 

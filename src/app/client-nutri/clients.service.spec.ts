@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ClientNuytiService } from './client-nuyti.service';
+import { ClientsService } from './clients.service';
 
-describe('ClientNuytiService', () => {
-  let service: ClientNuytiService;
+describe('ClientsService', () => {
+  let service: ClientsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ClientNuytiService);
+    service = TestBed.inject(ClientsService);
   });
 
   it('should be created', () => {
